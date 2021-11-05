@@ -1,0 +1,30 @@
+{
+  "name": "hellotypescript",
+  "version": "1.0.0",
+  "description": "hello typescript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\"",
+    "lite": "lite-server",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bootstrap": "4.0.0",
+    "@types/jquery": "3.3.1",
+    "bootstrap": "^4.0.0",
+    "commonjs": "^0.0.1",
+    "jquery": "^3.3.1",
+    "requirejs": "^2.3.5"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.2.0"
+  }
+}
