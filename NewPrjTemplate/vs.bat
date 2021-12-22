@@ -1,3 +1,3 @@
  
  rm "temp\vs2019\CMakeCache.txt"
- cmake -S ./ -B "temp/vs2022" -G"Visual Studio 17 2022"
+ cmake -S ./ -B "temp/vs2019" -G"Visual Studio 16 2019"
