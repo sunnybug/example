@@ -18,15 +18,17 @@ string(APPEND CMAKE_CXX_FLAGS " /Zc:__cplusplus")
 ######################
 #conan
 SET(CONAN_DISABLE_CHECK_COMPILER ON)
-execute_process(COMMAND conan install ${CMAKE_CURRENT_SOURCE_DIR} -if ${CMAKE_BINARY_DIR} -s build_type=Debug --build=missing RESULT_VARIABLE ret)
+# 如果不指定compiler，则有些包（sqlcipher/4.5.1)会报错：ConanException: Error, Visual environment already set to
+execute_process(COMMAND conan install ${CMAKE_CURRENT_SOURCE_DIR} -if ${CMAKE_BINARY_DIR} -s cppstd=20  -s compiler=Visual\ Studio -s compiler.version=16 -s build_type=Debug -s arch=x86_64 --build=missing RESULT_VARIABLE ret)
 if(ret EQUAL "1")
-    message( FATAL_ERROR "conan install debug fail")
+    message( FATAL_ERROR "conan install Debug fail")
 endif()
 
-execute_process(COMMAND conan install ${CMAKE_CURRENT_SOURCE_DIR} -if ${CMAKE_BINARY_DIR} -s build_type=Release --build=missing RESULT_VARIABLE ret)
+execute_process(COMMAND conan install ${CMAKE_CURRENT_SOURCE_DIR} -if ${CMAKE_BINARY_DIR} -s cppstd=20  -s compiler=Visual\ Studio -s compiler.version=16 -s build_type=MinSizeRel -s arch=x86_64 --build=missing RESULT_VARIABLE ret)
 if(ret EQUAL "1")
-    message( FATAL_ERROR "conan install debug fail")
+    message( FATAL_ERROR "conan install MinSizeRel fail")
 endif()
+
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
 conan_basic_setup(TARGETS KEEP_RPATHS)
